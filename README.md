@@ -1,61 +1,130 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Laravel - CRUD basic tutorial
+Follow these steps below to begin
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+### Cloning Setup
+1 - Open Git Bash and change directory to homestead
+```sh
+$ cd ~/homestead
+```
 
-## About Laravel
+2 - Open Homestead.yaml using Vi Editor
+```sh
+$ vi Homestead.yaml
+```
+Note: Press 'escape' and write ':q!' to exit Vi Editor
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+3 - Clone repository to folder where you map Homestead to point folder at based in Homestead.yaml
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Example, if **folders** in Homestead.yaml looks like below,
+```sh
+folders:
+    - map: d:/Laravel
+      to: /home/vagrant/code
+```
+So clone the repository to d:/Laravel
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Homestead Setup
+1 - Open Git Bash and change directory to homestead
+```sh
+$ cd ~/homestead
+```
 
-## Learning Laravel
+2 - Open homestead.yaml using Vi Editor
+```sh
+$ vi Homestead.yaml
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3 - Add new url mapping as below 
+Example, if current mapping **sites** look like this
+```sh
+sites:
+ - map: site.test
+   to: /home/vagrant/code/site/public
+```  
+Add new url mapping as below
+```sh
+sites:
+ - map: site.test
+   to: /home/vagrant/code/site/public
+ - map: crud.test
+   to: /home/vagrant/code/laravel-crud/public**
+```  
+Note: Press 'escape' and enter ':wq!' to exit and save Vi Editor
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Host Setup
+1 - Open Notepad as administrator, and open **hosts** file in C:\Windows\System32\drivers\etc
+2 - Add new host url as below at the bottom of the file
+```sh
+192.168.10.10 crud.test
+```
 
-## Laravel Sponsors
+### System Setup
+1 - Open Git Bash and change directory to homestead
+```sh
+$ cd ~/homestead
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2 - Run vagrant server
+```sh
+$ vagrant up
+```
 
-### Premium Partners
+If vagrant has already up, reload vagrant
+```sh
+$ vagrant reload --provision
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+3 - Enter vagrant ssh
+```sh
+$ vagrant ssh
+```
 
-## Contributing
+4 - Change directory to repository folder
+```sh
+$ cd code/laravel-crud
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5 - Run composer install
+```sh
+$ composer install
+```
 
-## Code of Conduct
+6 - Create .env file
+```sh
+$ cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7 - Add key to .env
+```sh
+$ php artisan key:generate
+```
 
-## Security Vulnerabilities
+7 - Open .env file
+```sh
+$ vi .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+8 - Edit .env file and change credentials as below
+```sh
+DB_DATABASE=crud
+DB_USERNAME=homestead
+DB_PASSWORD=secret
+```
+Note: Press 'escape' and enter ':wq!' to exit and save Vi Editor
 
-## License
+### Database Setup
+1 - Open database using Database Management System using credentials below
+```sh
+Hostname/IP: 192.168.10.10
+User: homestead
+Password: secret
+```
+2 - Create new database named **crud**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+3 - Migrate database configs
+```sh
+$ php artisan migrate
+```
+
+### Completion
+Open url **crud.test**
