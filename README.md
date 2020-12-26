@@ -1,4 +1,10 @@
 # Laravel - CRUD basic tutorial
+This repository is to help hown to setup a laravel with basic CRUD functions on Homestead
+
+### Requirements
+- Laravel
+- Homestead
+
 Follow these steps below to begin
 
 ### Cloning Setup
@@ -99,12 +105,12 @@ $ cp .env.example .env
 $ php artisan key:generate
 ```
 
-7 - Open .env file
+8 - Open .env file
 ```sh
 $ vi .env
 ```
 
-8 - Edit .env file and change credentials as below
+9 - Edit .env file and change credentials as below
 ```sh
 DB_DATABASE=crud
 DB_USERNAME=homestead
